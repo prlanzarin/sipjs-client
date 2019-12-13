@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="./sip-0.8.4.min.js"></script>
+  </head>
+  <body>
+    <div id="content-video-audio">
+      <div class="two-column-boxes">
+        <div class="column-box">
+          <div class="demo-window">
+            <div class="demo-view">
+              <video id="remoteVideo" muted="false" playsInline autoPlay></video>
+            </div>
+            <div class="left">
+              <h4>Remote view</h4>
+            </div>
+            <button id="start-video-button" class="right" type="button">Dial</button>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <div class="column-box">
+          <div class="demo-window">
+            <div class="demo-view">
+              <video id="localVideo" muted="false" playsInline autoPlay></video>
+            </div>
+            <div class="left">
+              <h4>Local View</h4>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="index.js"></script>
+  </body>
+</html>
