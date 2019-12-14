@@ -46,26 +46,28 @@ const createSimple = (callerURI, displayName, target, buttonId) =>  {
 
   const simple = new SIP.WebRTC.Simple(configuration);
 
-  simple.on('ended', function() {
+  simple.on('ended', () => {
+    remoteVideoElement.classList.remove('active');
+    localVideo.classList.remove('active');
     button.firstChild.nodeValue = 'Dial';
   });
 
-  remoteVideoElement.style.visibility = 'visible';
-
-  simple.on('connected', function() {
-    remoteVideoElement.style.visibility = 'visible';
+  simple.on('connected', () => {
+    localVideo.classList.add('active');
+    remoteVideoElement.classList.add('active');
     button.firstChild.nodeValue = 'Hang up';
   });
 
-  simple.on('ringing', function() {
+  simple.on('ringing', () => {
     simple.answer();
   });
 
-  button.addEventListener('click', function() {
+  button.addEventListener('click', () => {
     // No current call up
     if (simple.state === SIP.WebRTC.Simple.C.STATUS_NULL ||
       simple.state === SIP.WebRTC.Simple.C.STATUS_COMPLETED) {
-      simple.call(target);
+      const uri = document.getElementById('uri').value || target;
+      simple.call(uri);;
     } else {
       simple.hangup();
     }

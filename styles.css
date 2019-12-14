@@ -1,18 +1,67 @@
-.file-chooser-hack {
-    position: relative;
-    display: inline-block;
-    height: auto;
-    width: auto;
+input:focus, textarea:focus {
+  outline      : none;
 }
-.file-chooser-hack > input.file-choose-button {
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
+
+input {
+  flex: 2;
 }
-.file-chooser-hack:hover > button.file-choose-button.dark-gray-bg {
-    background-color: rgb(85,91,93);
+
+form {
+  display: flex;
 }
-.file-chooser-hack:hover > button.file-choose-button.dark-gray-bg {
-    background-color: rgb(85,91,93);
+
+textarea {
+  display: block;
+}
+
+button {
+  cursor: pointer;
+}
+
+#container {
+  font-size: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+#videos {
+  display: flex;
+  font-size: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: absolute;
+  transition: all 1s;
+}
+
+#localVideo {
+  opacity: 0;
+  object-fit: cover;
+  border: 2px solid gray;
+  max-height: 15%;
+  max-width: 15%;
+}
+
+#localVideo.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+#remoteVideo {
+  object-fit: contain;
+  opacity: 0;
+  position: absolute;
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  width: 100%;
+  height:100%
+}
+
+#remoteVideo.active {
+  opacity: 1;
+  z-index: 1;
 }
