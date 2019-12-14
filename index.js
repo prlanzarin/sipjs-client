@@ -1,3 +1,5 @@
+const remoteElementName = 'remoteVideo'
+// URL params parsing
 const URL = window.URL || window.webkitURL;
 const url = new URL(window.location.href);
 const registrarServer = url.searchParams.get('registrarUri') || 'sip.mconf.com';
@@ -12,25 +14,20 @@ const destination = url.searchParams.get('destination');
 
 let registered = false;
 
-const createSimple = (callerURI, displayName, target, remoteVideo, buttonId) =>  {
-  var remoteVideoElement = document.getElementById(remoteVideo);
+const createSimple = (callerURI, displayName, target, buttonId) =>  {
+  const remoteVideoElement = document.getElementById(remoteElementName);
   var button = document.getElementById(buttonId);
 
   var configuration = {
     media: {
       remote: {
         video: remoteVideoElement,
-        audio: remoteVideoElement
+        audio: remoteVideoElement,
       },
       local: {
         video: document.getElementById('localVideo'),
       },
       iceCheckingTimeout: 15000,
-      render: {
-        remote: remoteVideoElement,
-        video: remoteVideoElement,
-        audio: remoteVideoElement
-      },
     },
     ua: {
       wsServers: `ws://${registrarServer}:${wsPort}`,
@@ -80,7 +77,7 @@ const createSimple = (callerURI, displayName, target, remoteVideo, buttonId) => 
 (function () {
   if (window.RTCPeerConnection) {
     // TODO add a form for the destination when calling outbound
-    const simpleSession = createSimple(ourURI, displayName, destination, 'remoteVideo', 'start-video-button');
+    const simpleSession = createSimple(ourURI, displayName, destination, 'start-video-button');
     let registrationFailed = false;
     const failRegistration = () => {
       registrationFailed = true;
